@@ -6,6 +6,18 @@ const userSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
+    idCard :{
+        type:Number,
+        required:true,
+        unique:true,
+        min:13
+    },
+    phoneNo:{
+        type:Number,
+        required:true,
+        unique:true,
+        min:11
+    },
     email:{
         type:String,
         required:true,
@@ -19,6 +31,19 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
         enum:['voter','candidate']
+    },
+    role:{
+        type:String,
+        required:true,
+        enum:['admin','user']
+    },
+    age:{
+        type:Number,
+        required:true
+    },
+    isVoted:{
+        type:Boolean,
+        default:false
     }
 })
 userSchema.pre('save', async function(next){

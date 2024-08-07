@@ -29,8 +29,8 @@ const userSchema = new mongoose.Schema({
     },
     jobType:{
         type:String,
-        required:true,
-        enum:['voter','candidate']
+        enum:['voter','candidate'],
+        default:"voter"
     },
     role:{
         type:String,
@@ -68,7 +68,7 @@ userSchema.methods.comparePassword= async function(candidatePassword){
         }
         return isMatch;
     } catch (error) {
-        throw error;
+        return false;
     }
 }
 

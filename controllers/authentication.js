@@ -4,18 +4,18 @@ const login = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   if (!email || !password) {
-    res.status(400).json("Fill All The Field");
+    return res.status(400).json("Fill All The Field");
   }
   const userId = await user.findOne({ email: email });
   if (!userId) {
-    res.status(400).json("User Not Exits");
+    return res.status(400).json("User Not Exits");
   }
   const isMatch = await userId.comparePassword(password);
   if (!isMatch) {
-    res.status(400).json("Wrong Password");
+    return res.status(400).json("Wrong Password");
   }
   const jwt = genToken(userId.id);
-  res.status(200).json(jwt);
+  return res.status(200).json(jwt);
 };
 
 const signup = async (req, res) => {
@@ -27,12 +27,10 @@ const signup = async (req, res) => {
     const phoneNo = req.body.phoneNo;
     const age = req.body.age;
     const password = req.body.password;
-    const jobType = req.body.jobType;
     if (
       !username ||
       !email ||
       !password ||
-      !jobType ||
       !idCard ||
       !phoneNo ||
       !age ||
@@ -59,7 +57,7 @@ const signup = async (req, res) => {
     newUser.age = age;
     newUser.role = role;
     newUser.phoneNo = phoneNo;
-    newUser.jobType = jobType;
+    newUser.jobType;
     const response = await newUser.save();
     const jwt = genToken(response.id);
     res.status(200).json(jwt);

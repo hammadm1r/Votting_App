@@ -23,4 +23,5 @@ const genToken = (id) =>{
     return token;
 }
 
+
 module.exports = {genToken,authToken}

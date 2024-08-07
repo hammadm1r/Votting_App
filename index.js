@@ -15,8 +15,8 @@ const PORT = process.env.PORT;
 app.listen(PORT);
 app.use(bodyParser.json());
 app.use('/auth', logs,auth);
-app.use("/vote",vote);
-app.use("/admin",admin);
+app.use("/vote",logs,vote);
+app.use("/admin",logs,admin);
 app.get('/',(req,res)=>{
     res.send('Hello World')
 })

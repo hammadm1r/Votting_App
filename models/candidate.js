@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./user')
 const candidateSchema = new mongoose.Schema({
-    _id :{
+    Candidate_Id :{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'User',
         required :true
@@ -12,15 +12,14 @@ const candidateSchema = new mongoose.Schema({
     },
     votes:[{
         voters:{
-            _id : mongoose.Schema.Types.ObjectId,
-            ref : 'User',
-            required :true,
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'User'
         },
         votedAt:{
             type:Date,
             default: Date.now()
         }
-    }],
+}],
     voteCount:{
         type:Number,
         default:0
@@ -28,4 +27,4 @@ const candidateSchema = new mongoose.Schema({
     }
 )
 
-module.exports = mongoose.Model('candidate',candidateSchema);
+module.exports = mongoose.model('candidate',candidateSchema);

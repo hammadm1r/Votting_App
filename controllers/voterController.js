@@ -17,8 +17,26 @@ const voteCandidate = async(req,res) => {
     return res.status(200).json("Voted");
     } catch (error) {
         return res.status(400).json(error);  
-    }
-
-    
+    } 
 }
-module.exports = {voteCandidate};
+const candidateProfile = async(req,res) => {
+    try {
+        const Candidate_id= req.params._id;
+    const Candidate_Profile =await candidate.findOne({Candidate_Id:Candidate_id});
+    if(!Candidate_Profile){
+        return res.status(404).json({message:"Candidate not found"})
+    }
+    return res.status(200).json(Candidate_Profile);
+    } catch (error) {
+        return res.status(400).json(error);
+    }
+}
+const allCandidate = async(req,res) => {
+        try {
+            const allCandidate = await candidate.find();
+            return res.status(200).json(allCandidate);
+        } catch (error) {
+            return res.status(400).json(error);
+        }
+}
+module.exports = {voteCandidate,candidateProfile,allCandidate};
